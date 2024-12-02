@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Adviento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            box-sizing: border-box;
+        }
+        .titulo {
+            margin-top: 20px;
+        }
+        .icono-calendario {
+            width: 100px; /* Tamaño ajustado a 100x100 px */
+            height: 100px; /* Tamaño ajustado a 100x100 px */
+        }
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            padding: 0 10px; /* Espacio adicional para no tocar los bordes */
+        }
+        .dia {
+            width: 100px; /* Tamaño de la puerta */
+            height: 100px; /* Tamaño de la puerta */
+            background-size: cover;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1; /* Mantener la proporción cuadrada */
+        }
+        .dia.locked {
+            background-image: url('images/no_disponible.jpg');
+            background-size: cover;
+            cursor: not-allowed;
+        }
+        .contenido {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .imagen {
+            width: 100px; /* Tamaño de la imagen de "no disponible" */
+            height: 100px; /* Tamaño de la imagen de "no disponible" */
+            object-fit: cover;
+        }
+        .imagen-no-disponible {
+            width: 100px; /* Tamaño de la imagen de "no disponible" */
+            height: 100px; /* Tamaño de la imagen de "no disponible" */
+            object-fit: cover;
+        }
+        .imagen-regalo {
+            width: 100px; /* Ajustar la imagen del regalo para que tenga 100 de alto y 200 de largo */
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        /* Ajustes de diseño para dispositivos móviles */
+        @media (max-width: 768px) {
+            .calendario {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dia {
+                font-size: 20px;
+            }
+            .icono-calendario {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        @media (max-width: 480px) {
+            .calendario {
+                grid-template-columns: 1fr;
+            }
+            .dia {
+                font-size: 18px;
+            }
+            .icono-calendario {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="titulo">
+        <img src="images/icono_calendario.png" alt="Icono del Calendario" class="icono-calendario">
+    </div>
+    <h1>Calendario de Adviento</h1>
+    <div class="calendario" id="calendario">
+        <!-- Los días del calendario se generarán dinámicamente con JavaScript -->
+    </div>
+    <div id="contenido" class="contenido"></div>
+
+    <script>
+        // Fecha de inicio del calendario (1 de diciembre de 2024)
+        const fechaInicio = new Date(2024, 11, 1); // Mes 11 es diciembre en JavaScript
+        const fechaActual = new Date();
+        const diaActual = fechaActual.getDate();
+        const calendario = document.getElementById('calendario');
+        const contenido = document.getElementById('contenido');
+
+        // Configuración de los contenidos de los días
+        const contenidos = {};
+        for (let i = 1; i <= 24; i++) {
+            contenidos[i] = {
+                imagenPuerta: `images/puerta_${i}.jpg`, // Imagen de la puerta para cada día
+                imagenRegalo: `images/regalo_${i}.jpg`   // Imagen de regalo para cada día
+            };
+        }
+
+        // Generar las puertas en el calendario
+      
